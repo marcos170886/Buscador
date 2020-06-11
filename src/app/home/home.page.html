@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title >
+      Google Busca: Oficinas
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense" >
+    <ion-toolbar color="primary">
+      <ion-title size="large">Google Busca: Oficinas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-header>
+    <ion-toolbar>
+      <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="Buscar por um lugar"></ion-searchbar>
+    </ion-toolbar>
+  </ion-header>
+  <ion-list [hidden]="autocompleteItems.length == 0">  
+    <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
+      {{ item.description }}
+    </ion-item>
+  </ion-list>
+  <div #mapElement class='map'></div>  <!--Mostra o Mapa-->
+  <ion-list>
+    <ion-button (click)="tryGeolocation()">Minha localização</ion-button>
+    <ion-button (click)="updatePosition()">Atualizar</ion-button>
+    <ion-list>
+      <ion-label ngDefaultControl [(ngModel)]="address">{{address}}</ion-label>
+    </ion-list>
+    <ion-button (click)="carrepairfinder()">Buscar por Oficinas</ion-button>
+    <ion-list [hidden]="diningItems.length == 0">  
+      <ion-item *ngFor="let item of diningItems" tappable (click)="selectSearchResult(item)"> <!--Mostra resultado-->
+        {{ item.name }}
+      </ion-item>
+    </ion-list>
+  </ion-list>
+
+</ion-content>
